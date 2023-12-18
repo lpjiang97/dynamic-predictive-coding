@@ -2,7 +2,7 @@
 Code acommpanying _Dynamic Predictive Coding: A Model of Hierarchical Sequence
 Learning and Prediction in the Neocortex_
 
-For two-level results, stay on this branch (`main`). For three-level results, switch to the `three_level` branch.
+For three-level results, stay on this branch (`three_level`). For two-level results, switch to the `main` branch.
 
 ## Setup
 We provide an [Apptainer](https://apptainer.org/) image `predcode.sif` (similar to a Docker image), which provides all the necessary dependencies to train and analyze the model. You can download the image [here](https://drive.google.com/drive/folders/120T-wChXIR-aI7zL-9AeQF1hq-5GZFIy?usp=sharing). You're also welcome to re-build this image by
