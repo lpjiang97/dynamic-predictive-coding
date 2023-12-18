@@ -1,0 +1,47 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/pytorch:22.11-py3
+
+%setup
+    # Append the Slurm UID/GID from the node to the container:
+    grep ^slurm: /etc/passwd >> ${APPTAINER_ROOTFS}/etc/passwd
+    grep ^slurm: /etc/group >> ${APPTAINER_ROOTFS}/etc/group
+
+%files
+    # Copy the Hyak Slurm repository and the Hyak user tools
+    # libraries and executables:
+    /etc/yum.repos.d/hyak-slurm.repo
+    /opt/hyak-user-tools
+    /usr/local/bin/hyak*
+
+%environment
+    export SDL_VIDEODRIVER=x11
+    export LIBGL_ALWAYS_INDIRECT=1
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    
+    apt-get -y update 
+    apt-get install --no-install-recommends -y swig xauth build-essential libsdl2-dev python3-tk texlive-latex-extra cm-super dvipng
+
+    pip install -r /mnt/requirements.txt
+
+    mkdir /scr /mmfs1
+    ln --symbolic /mmfs1/sw /sw
+    ln --symbolic /mmfs1/data /data
+    ln --symbolic /mmfs1/gscratch /gscratch
+    
+    unset DEBIAN_FRONTEND
+
+%runscript
+    
+    case ${@} in
+        "")
+            # Launch an interactive shell if no arguments are given:
+            exec /bin/bash
+            ;;
+        *)
+            # If any arguments are given, attempt to run them as a command:
+            exec ${@}
+            ;;
+    esac
+

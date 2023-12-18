@@ -1,0 +1,6 @@
+seaborn
+SciencePlots
+tqdm
+statsmodels
+scikit-plot
+slrm
