@@ -1,0 +1,36 @@
+{
+    "seed": 35, 
+
+    "input_dim": 324,
+    "r_dim": 648,
+    "r2_dim": 20,
+    "r3_dim": 10,
+    "mix_dim": 5,
+    "mix_dim_2": 2,
+    "hyper_hid_dim": 10,
+    "hyper_hid_dim_2": 10,
+    "temp_hid_dim": 32,
+
+    "thres": 0.73,
+    "lr_r": 2.5,
+    "lr_r2": 0.001,
+    "lr_r3": 0.001,
+    "lmda_r": 0.001,
+    "lmda_r2": 0.000005,
+    "lmda_r3": 0.0005,
+    "max_iter": 500,
+    "tol": 1e-2,
+    "temp_weight": 2.5,
+    "alpha": 0.75,
+
+    "batch_size": 500,
+    "learning_rate_s": 0.5,
+    "learning_rate_t": 0.001,
+    "K1": 400,
+    "K2": 5,
+    "weight_decay": 0.00001,
+    "num_epochs": 300,
+    "num_workers": 4,
+    "save_summary_steps": 5,
+    "learning_rate_gamma": 0.99
+}

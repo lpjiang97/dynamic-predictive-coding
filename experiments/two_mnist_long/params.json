@@ -1,0 +1,27 @@
+{
+    "model": "two",
+    "seed": 20,
+
+    "input_dim": 324,
+    "r_dim": 648,
+    "r2_dim": 20,
+    "mix_dim": 5,
+    "hyper_hid_dim": 10,
+
+    "lr_r": 2.5,
+    "lr_r2": 0.001,
+    "lmda_r": 0.001,
+    "lmda_r2": 0.000005,
+    "max_iter": 500,
+    "tol": 1e-2,
+    "temp_weight": 2.5,
+
+    "batch_size": 512,
+    "learning_rate_s": 0.5,
+    "learning_rate_t": 0.001,
+    "weight_decay": 0.00001,
+    "num_epochs": 200,
+    "num_workers": 4,
+    "save_summary_steps": 5,
+    "learning_rate_gamma": 0.98
+}

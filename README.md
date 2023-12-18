@@ -12,44 +12,33 @@ apptainer build --bind $PWD:/mnt --fakeroot predcode.sif apptainer.def
 ## Data
 You can download the data [here](https://drive.google.com/drive/folders/120T-wChXIR-aI7zL-9AeQF1hq-5GZFIy?usp=sharing). The data folder should be placed in the root directory of this repository.
 
+The data folder for three-level models are:
+- `data/clock`: MNIST data with clockwise bouncing type
+- `data/straight`: MNIST data with straight bouncing type
+- `data/three`: `clock` and `straight` combined
+
 ## Training the models
 
 You can download the `experiments` folder from [here](https://drive.google.com/drive/folders/120T-wChXIR-aI7zL-9AeQF1hq-5GZFIy?usp=sharing), which contains pretrained model weights. It also contains the `parmas.json` files which can be used to train the models (see below). The experiments folder should be placed in the root directory of this repository.
 
-To train the model using the natural video dataset: 
+### Pretraining the second-level transition matrices
+Clockwise bouncing:
 ```
-apptainer run --home $PWD --nv predcode.sif python train_ista.py --model_dir experiments/two_forest --data_dir data/forest
-```
-
-To train the model using the Moving MNIST dataset:
-```
-apptainer run --home $PWD --nv predcode.sif python train_ista.py --model_dir experiments/two_mnist --data_dir data/mnist
+apptainer run --home $PWD --nv predcode.sif python train_two_trans.py --model_dir experiments/two_trans_clock --data_dir data/clock
 ```
 
-You will see that **we have already provided pretrained models** in the `experiments` directory. In either folder, we used the model at the last iteration, `last.pth.tar`.
-
-### Training the memory model
-
-To train the memory model: 
+Straight bouncing:
 ```
-apptainer run --home $PWD --nv predcode.sif python train_memory.py --model_dir experiments/memory --data_dir data/memory
+apptainer run --home $PWD --nv predcode.sif python train_two_trans.py --model_dir experiments/two_trans_straight --data_dir data/straight
 ```
 
-To train the memory model with multiple conditioning:
+### Training the three-level model
+
 ```
-apptainer run --home $PWD --nv predcode.sif python train_memory.py --model_dir experiments/memory_multi --data_dir data/memory_multi
+apptainer run --home $PWD --nv predcode.sif python train_three.py --model_dir experiments/three --data_dir data/three
 ```
 
 ## Running the analysis
-All analysis scripts are saved in the `analysis` folder. To run any of the analysis:
-```
-cd analysis/
-apptainer run --home $PWD --nv predcode.sif python [xxx_analysis.py]
-```
-
-Each of these analysis will save analysis metadata in `analysis/results` folder. For any script, add the `-h` flag to see all options.
-
-## Visualizing the results
-Once all analysis scripts have been run, you can run through the `visualization.ipynb` notebook to visualize the results and there should be no errors. 
-
-The figures produced by the visualization notebook are saved in `analysis/figures` folder, which make up all of the figures (except for the schematics) in the paper.
+The `analysis` folder contains two notebooks:
+- `analysis/err_dist.ipynb`: analysis for calculating the first-level prediction error threshold
+- `analysis/viz.ipynb`: analysis for the three-level model
