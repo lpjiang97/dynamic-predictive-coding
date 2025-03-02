@@ -1,5 +1,5 @@
 # DynPredCode
-Code acommpanying [_Dynamic Predictive Coding: A Model of Hierarchical Sequence
+Code accompanying [_Dynamic Predictive Coding: A Model of Hierarchical Sequence
 Learning and Prediction in the Neocortex_](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011801)
 
 For two-level results, stay on this branch (`main`). For three-level results, switch to the `three_level` branch.
